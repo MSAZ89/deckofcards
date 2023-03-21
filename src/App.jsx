@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
   const [card, setCard] = useState(null);
   const [deckId, setDeckId] = useState(null);
+  const [remaining, setRemaining] = useState(null);
 
   const drawCard = async () => {
     const response = await fetch(
@@ -10,6 +12,7 @@ function App() {
     );
     const data = await response.json();
     setCard(data.cards[0]);
+    setRemaining(data.remaining);
   };
 
   const newDeck = async () => {
@@ -17,6 +20,7 @@ function App() {
       "https://deckofcardsapi.com/api/deck/new/shuffle/"
     );
     const data = await response.json();
+    setRemaining(data.remaining);
     setDeckId(data.deck_id);
     setCard(null);
   };
@@ -34,11 +38,19 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app">
       {card ? (
         <>
-          <img src={card.image} alt="card" />
-          <p>{deckId}</p>
+          <button
+            style={{ marginBottom: "30px", border: "1px solid lightgrey" }}
+            onClick={drawCard}
+            disabled={card.remaining === 0}
+          >
+            Draw a card
+          </button>
+          <div>
+            <img src={card.image} alt={card.code} />
+          </div>
         </>
       ) : (
         <>
@@ -47,9 +59,10 @@ function App() {
         </>
       )}
       {card && (
-        <button onClick={drawCard} disabled={card.remaining === 0}>
-          Draw a card
-        </button>
+        <>
+          <p>Remaining cards in deck: {remaining}</p>
+          <p>Deck id: ({deckId})</p>
+        </>
       )}
     </div>
   );
