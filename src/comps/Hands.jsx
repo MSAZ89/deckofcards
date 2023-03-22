@@ -1,6 +1,6 @@
 export default function Hands(props) {
   return (
-    <div className="flex flex-wrap gap-1 mx-auto">
+    <div className="flex flex-wrap gap-4 mx-auto justify-center">
       {props.cards.map((card, index) => (
         <div
           key={index}
