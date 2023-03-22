@@ -51,7 +51,7 @@ function App() {
       {card ? (
         <>
           <PrimaryButton
-            className="my-12"
+            className="my-6"
             buttonText={
               remaining === 0 ? (
                 <span className="p-20">Clear Cards</span>
@@ -62,7 +62,7 @@ function App() {
             onClick={drawCard}
             disabled={card.remaining === 0}
           />
-          <p className="mb-12">
+          <p className="mb-6">
             Remaining cards in deck:{" "}
             <span className="font-semibold text-xl">
               {remaining === 0 ? (
@@ -75,23 +75,25 @@ function App() {
           {
             //if the first letter of a card code is "A" then the card is an ace, add a div if the card is an ace
             card && card.code[0] === "A" && (
-              <div className="absolute top-0 left-0 bg-red-500 text-white font-bold text-2xl p-2 rounded">
-                <img className="w-20" src={card.image} alt={card.code} />
-                <p className="text-center">Draw #{cards.indexOf(card) + 1}</p>
-              </div>
+              <motion.div
+                key={card.code}
+                //initial x between -500 and positive 500
+                initial={{ opacity: 0, scale: 1.4 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+                exit={{ opacity: 0 }}
+                className="absolute top-0 left-0 bg-red-500 text-white font-bold text-2xl p-2 rounded w-32"
+                whileHover={{ scale: 1.4 }}
+              >
+                <img src={card.image} alt={card.code} />
+                <p>Draw #{cards.indexOf(card) + 1}</p>
+              </motion.div>
             )
           }
 
-          <motion.div
-            key={card.code}
-            //initial x between -500 and positive 500
-            initial={{ x: Math.floor(Math.random() * 1000) - 500 }}
-            animate={{ x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="h-50"
-          >
-            <img src={card.image} alt={card.code} />
-          </motion.div>
+          <div>
+            <img className="w-40" src={card.image} alt={card.code} />
+          </div>
         </>
       ) : (
         <>
