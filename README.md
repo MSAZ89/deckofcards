@@ -4,4 +4,4 @@ Draws a random card from a dynamically generated deck of cards. Built with React
 
 ## Project URL:
 
-deckofcards-blue.vercel.app
+https://deckofcards-blue.vercel.app/
