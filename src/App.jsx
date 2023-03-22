@@ -51,23 +51,43 @@ function App() {
         <>
           <PrimaryButton
             className="my-12"
-            buttonText="Draw a card"
+            buttonText={
+              remaining === 0 ? (
+                <span className="text-red-500 p-20">Clear Cards</span>
+              ) : (
+                "Draw Card"
+              )
+            }
             onClick={drawCard}
             disabled={card.remaining === 0}
           />
+          <p className="mb-12">
+            Remaining cards in deck:{" "}
+            <span className="font-semibold text-xl">
+              {remaining === 0 ? (
+                <span className="text-red-400">Empty Deck</span>
+              ) : (
+                remaining
+              )}
+            </span>
+          </p>
           <div>
             <img src={card.image} alt={card.code} />
           </div>
         </>
       ) : (
         <>
-          <p>Empty Deck</p>{" "}
-          <button onClick={() => handleNewDeck()}>New Deck</button>
+          <PrimaryButton
+            className="my-12"
+            buttonText="New Deck"
+            onClick={() => handleNewDeck()}
+          >
+            New Deck
+          </PrimaryButton>
         </>
       )}
       {card && (
         <>
-          <p>Remaining cards in deck: {remaining}</p>
           <p className="mb-12">Deck id: ({deckId})</p>
         </>
       )}
