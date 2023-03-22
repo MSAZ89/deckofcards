@@ -74,8 +74,9 @@ function App() {
           {
             //if the first letter of a card code is "A" then the card is an ace, add a div if the card is an ace
             card && card.code[0] === "A" && (
-              <div className="absolute top-0 left-0 bg-red-500 text-white font-bold text-2xl p-12 rounded">
-                Ace
+              <div className="absolute top-0 left-0 bg-red-500 text-white font-bold text-2xl p-2 rounded">
+                <img className="w-20" src={card.image} alt={card.code} />
+                <p className="text-center">Draw #{cards.indexOf(card) + 1}</p>
               </div>
             )
           }
