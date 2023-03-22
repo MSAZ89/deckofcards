@@ -53,7 +53,7 @@ function App() {
             className="my-12"
             buttonText={
               remaining === 0 ? (
-                <span className="text-red-500 p-20">Clear Cards</span>
+                <span className="p-20">Clear Cards</span>
               ) : (
                 "Draw Card"
               )
