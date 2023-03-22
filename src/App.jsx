@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Hands from "./comps/Hands";
 import PrimaryButton from "./comps/ui/PrimaryButton";
+import { motion } from "framer-motion";
 
 function App() {
   const [card, setCard] = useState(null);
@@ -80,9 +81,17 @@ function App() {
               </div>
             )
           }
-          <div>
+
+          <motion.div
+            key={card.code}
+            //initial x between -500 and positive 500
+            initial={{ x: Math.floor(Math.random() * 1000) - 500 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="h-50"
+          >
             <img src={card.image} alt={card.code} />
-          </div>
+          </motion.div>
         </>
       ) : (
         <>
